@@ -1,33 +1,38 @@
 <template>
-  <div>
-<!-- <router-view></router-view>-->
-    <!--<Login></Login>-->
-<Menu></Menu>
-    <router-view></router-view>
-    <!--<Entry></Entry>-->
-<!--<Resume></Resume>-->
+  <div >
+<router-view></router-view>
   </div>
 </template>
 <script>
   import Menu from './components/Menu'
   import Login from "./components/Login"
-  import Resume from "./components/Resume";
-  import Entry from "./views/Entry";
+  import Resume from "./components/Personal/Resume";
   import MyResume from "./components/MyResume"
   import Register from "./components/Register";
   import personalInfo from "./components/Personal/personalInfo";
+  import test from "./components/test";
+
 export default {
   name: 'App',
+  data(){
+    return{
+
+    }
+  },
   components:{
    Register,
     MyResume,
-    Entry,
-    'Menu':Menu,
-    'Login':Login,
+    Menu,
+    Login,
     Resume,
-    personalInfo
+    personalInfo,
+    test
+  },
+  methods:{
+
+    }
   }
-}
+
 </script>
 
 <style>

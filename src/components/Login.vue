@@ -12,12 +12,17 @@
         </Input>
       </FormItem>
       <FormItem>
-        <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
+        <Button type="primary" @click="handleSubmit('formInline')" >Signin</Button>
+      </FormItem>
+      <FormItem>
+        <Button type="primary" @click="handleRegister">Register</Button>
       </FormItem>
     </Form>
   </div>
 </template>
 <script>
+  import {request} from "../network/request";
+  import axios from 'axios'
   export default {
     name:"Login",
     data () {
@@ -34,7 +39,8 @@
             { required: true, message: 'Please fill in the password.', trigger: 'blur' },
             { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
           ]
-        }
+        },
+        userId:'aaa'
       }
     },
     methods: {
@@ -46,15 +52,43 @@
             this.$Message.error('Fail!');
           }
         })*/
-
-        this.$router.replace('')
+    /* request({
+       url:'/login',
+       params:{
+         username:this.formInline.user,
+         password:this.formInline.password
+       }
+     }).then(
+       res => {
+         console.log(res)
+       }
+     ).catch(
+       err => {
+         console.log(err)
+       }
+     )*/
+    axios.get('/apis/login',{
+      username:this.formInline.user,
+      password:this.formInline.password
+    }).then(
+      res => {
+        console.log(res)
+      }
+    ).catch(
+      err => {
+          console.log(err)
+      })
+ /*      this.$router.replace('/user/'+this.userId+'/home')*/
+      },
+      handleRegister(){
+        this.$router.replace('/register')
       }
     }
   }
 </script>
 <style scoped>
   #login{
-    display: flex;
+    display: flow;
     position: absolute;
     top: 50%;
     left: 30%;

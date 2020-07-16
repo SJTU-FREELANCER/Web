@@ -1,3 +1,10 @@
+<!--
+接口：/get_jobs
+参数：无
+返回信息：List<Recruit_info>
+-->
+
+
 <template>
   <div id="app"><!--
 <div id="tab-bar">
@@ -7,53 +14,62 @@
   <div class="tab-bar-item">求职</div>
   <div class="tab-bar-item">个人中心</div>
 </div>-->
-    <div class="menu">
-      <Dropdown class="menu-item">
-        <a href="javascript:void(0)" @click="homeClick">
-          首页
-        </a>
-      <!--  <DropdownMenu slot="list">
-          <DropdownItem></DropdownItem>
-        </DropdownMenu>-->
-      </Dropdown>
+    <v-affix>
+
+      <div class="menu">
+        <Dropdown class="img-item">
+          <img src="../assets/img/deer.jpg" alt="can't load" width="100" height="100">
+        </Dropdown>
+        <Dropdown class="menu-item">
+          <a href="javascript:void(0)" @click="homeClick">
+            首页
+          </a>
+          <!--  <DropdownMenu slot="list">
+              <DropdownItem></DropdownItem>
+            </DropdownMenu>-->
+        </Dropdown>
 
 
-      <Dropdown class="menu-item">
-        <a href="javascript:void(0)" @click="recruitClick">
-          招聘
-          <Icon type="ios-arrow-down"></Icon>
-        </a>
-        <DropdownMenu slot="list">
-          <DropdownItem></DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+        <Dropdown class="menu-item">
+          <a href="javascript:void(0)" @click="recruitClick">
+            招聘
+            <Icon type="ios-arrow-down"></Icon>
+          </a>
+          <DropdownMenu slot="list">
+            <DropdownItem></DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
 
 
-      <Dropdown class="menu-item" @on-click="apply($event)">
-        <a href="javascript:void(0)" @click="applyClick">
-          求职
-          <Icon type="ios-arrow-down"></Icon>
-        </a>
-        <DropdownMenu slot="list">
-          <DropdownItem name="resume"></DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+        <Dropdown class="menu-item" @on-click="apply($event)">
+          <a href="javascript:void(0)" @click="applyClick">
+            求职
+            <Icon type="ios-arrow-down"></Icon>
+          </a>
+          <DropdownMenu slot="list">
+            <DropdownItem name="resume"></DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
 
 
-      <Dropdown class="menu-item" @on-click="personalClick($event)">
-        <a href="javascript:void(0)" @click="profileClick">
-          个人中心
-          <Icon type="ios-arrow-down"></Icon>
-        </a>
-        <DropdownMenu slot="list">
-          <DropdownItem  name="info">个人信息</DropdownItem>
-          <DropdownItem name="resume">我的简历</DropdownItem>
-          <DropdownItem name="exit">退出账号</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+        <Dropdown class="menu-item" @on-click="personalClick($event)">
+          <a href="javascript:void(0)" @click="profileClick">
+            个人中心
+            <Icon type="ios-arrow-down"></Icon>
+          </a>
+          <DropdownMenu slot="list">
+            <DropdownItem  name="info">个人信息</DropdownItem>
+            <DropdownItem name="resume">我的简历</DropdownItem>
+            <DropdownItem name="exit">退出账号</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
 
-      <Avatar icon="ios-person" />你好，
-    </div>
+        <Dropdown class="menu-item">
+          <Avatar src="src/assets/img/avater.jpg" /> 你好，{{ userId }}
+        </Dropdown>
+
+      </div>
+    </v-affix>
 
   </div>
 
@@ -64,6 +80,16 @@
 <script>
 export default {
   name:"Menu",
+  data(){
+    return{
+
+    }
+  },
+  computed:{
+    userId(){
+      return this.$route.params.userId
+    }
+  },
   methods:{
     personalClick:function (name) {
       if(name=='info') this.$router.replace('personalInfo')
@@ -74,10 +100,10 @@ export default {
       if(name=='resume')  this.$router.replace('resumeDisplay')
     },
     homeClick:function(){
-      this.$router.replace('/home')
+      this.$router.replace('/user/'+this.userId+'/home')
     },
     recruitClick:function(){
-      this.$router.replace('/recruit')
+      this.$router.replace('/user/'+this.userId+'/recruitInfo')
     },
     applyClick:function () {
         this.$router.replace('/apply')
@@ -96,7 +122,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+
   }
   .menu {
 
@@ -108,7 +134,9 @@ export default {
     font-size: large;
     text-align: center;
     flex: 1;
-    height: 49px;
+    height: 49px;margin-top: 50px;
   }
-
+ .img-item{
+   top:0;
+ }
 </style>

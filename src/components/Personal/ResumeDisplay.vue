@@ -27,6 +27,9 @@ methods:{
      this.$router.push('/new_apply')
    /* console.log(this)
     root.template='<Resume.vue>'*/
+  },
+  changeResume(){
+    this.$router.replace('resume')
   }
 },
     //组件创建完之后请求数据
@@ -35,7 +38,8 @@ methods:{
      getApplyInfo().then(res => {
        this.result=res
      })
-    }
+    },
+
   }
 </script>
 

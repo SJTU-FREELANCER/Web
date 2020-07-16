@@ -1,6 +1,7 @@
 <template>
   <div id="home">
-    <Input id="search" search enter-button placeholder="Enter something..." />
+    <filterInput></filterInput>
+
 
     <v-card title="3600-4500  徐汇   公司保洁员/商场保洁员 保洁   工作时间：7:30-16:30" @mouseleave.native="changeShow" @mouseenter.native="changeShow">
 
@@ -48,11 +49,15 @@
 </template>
 
 <script>
+  import filterInput from "../filterInput";
   export default {
     data: function() {
       return {
         isShow:false
       }
+    },
+    components:{
+      filterInput
     },
     methods: {
       changeShow(){
@@ -63,11 +68,11 @@
 </script>
 
 <style scoped>
-#home{
-  margin-right: 200px;
-  margin-left: 200px;
+  #home{
+    margin-right: 200px;
+    margin-left: 200px;
 
-}
+  }
   #search{
     margin-bottom: 50px;
   }

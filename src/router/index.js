@@ -1,28 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from "../components/Login"
-import Recruit from "../components/RecruitInfo";
-import Apply from "../components/Resume";
+import Recruit from "../components/Recruit/RecruitInfo";
+import Apply from "../components/Personal/Resume";
 import home from "../components/Home/home";
 import Profile from "../components/Profile";
+import Register from "../components/Register";
 import ApplyHome from "../components/Personal/ResumeDisplay";
 import personalInfo from "../components/Personal/personalInfo";
 import ResumeDisplay from "../components/Personal/ResumeDisplay";
-import view from "../views/view";
+import Resume from "../components/Personal/Resume";
+import User from "../components/User";
+import RecruitInfo from "../components/Recruit/RecruitInfo";
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path:'',
-      redirect:'/login'
-    },
-    {
-      path:'view',
-      component:view
-    },
-    {
-      path: '/',
+      path: '',
       name: 'Login',
       component: Login
     },
@@ -47,16 +42,53 @@ export default new Router({
       component:Profile
     },
     {
-      path:'/personalInfo',
+      path:'/register',
+      component:Register
+    },
+   /* {
+      path:'/user/:userId/personalInfo',
       component:personalInfo
     },
     {
-      path:'/resumeDisplay',
+      path:'/user/:userId/resumeDisplay',
       component:ResumeDisplay
     },
     {
-      path:'/home',
+      path:'/user/:userId/home',
       component:home
+    },
+    {
+      path:'/user/:userId/resume',
+      component:Resume
+    },*/
+    {
+      path:'/user/:userId',
+      component:User,
+      meta: {
+        title: '用户'
+      },
+      children:[
+        {
+          path:'personalInfo',
+          component:personalInfo
+        },
+        {
+          path:'resumeDisplay',
+          component:ResumeDisplay
+        },
+        {
+          path:'home',
+          component:home
+        },
+        {
+          path:'resume',
+          component:Resume
+        },
+        {
+          path:'recruitInfo',
+          component:RecruitInfo
+        }
+      ]
     }
 
   ],

@@ -1,6 +1,5 @@
 import {request} from "./request";
-
-export function getApplyInfo() {
+export function login(){
   return request({
     url:'login'
   })
