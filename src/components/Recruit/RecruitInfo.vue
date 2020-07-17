@@ -3,7 +3,8 @@
     <filterInput></filterInput>
 
 
-    <v-card title="3600-4500  徐汇   公司保洁员/商场保洁员 保洁   工作时间：7:30-16:30" @mouseleave.native="changeShow" @mouseenter.native="changeShow">
+    <v-card title="3600-4500  徐汇   公司保洁员/商场保洁员 保洁   工作时间：7:30-16:30"
+            @mouseleave.native="changeShow" @mouseenter.native="changeShow">
 
       <p>工作内容：</p>
       <p>1.负责公司旗舰体验中心日常保洁工作，保持指定区域干净整洁；

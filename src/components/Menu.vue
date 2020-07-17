@@ -65,7 +65,7 @@
         </Dropdown>
 
         <Dropdown class="menu-item">
-          <Avatar src="src/assets/img/avater.jpg" /> 你好，{{ userId }}
+           你好，{{ this.GLOBAL.user_Name}}
         </Dropdown>
 
       </div>
@@ -106,7 +106,7 @@ export default {
       this.$router.replace('/user/'+this.userId+'/recruitInfo')
     },
     applyClick:function () {
-        this.$router.replace('/apply')
+        this.$router.replace('/user/'+this.userId+'/applyInfo')
     },
     profileClick:function () {
        this.$router.replace('/profile')

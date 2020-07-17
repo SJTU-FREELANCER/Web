@@ -5,10 +5,11 @@ import App from './App'
 import router from './router'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
+import Global from './global_var'
 Vue.config.productionTip = false
 //Vue.use(router);
 Vue.use(ViewUI);
-
+Vue.prototype.GLOBAL=Global
 //import css
 import 'vue-beauty/package/style/vue-beauty.min.css'
 //import components

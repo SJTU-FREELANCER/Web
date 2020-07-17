@@ -17,7 +17,9 @@
       <FormItem>
         <Button type="primary" @click="handleRegister">Register</Button>
       </FormItem>
+
     </Form>
+
   </div>
 </template>
 <script>
@@ -29,7 +31,8 @@
       return {
         formInline: {
           user: '',
-          password: ''
+          password: '',
+          error:false
         },
         ruleInline: {
           user: [
@@ -40,7 +43,7 @@
             { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
           ]
         },
-        userId:'aaa'
+        userId:''
       }
     },
     methods: {
@@ -52,33 +55,49 @@
             this.$Message.error('Fail!');
           }
         })*/
-    /* request({
-       url:'/login',
-       params:{
-         username:this.formInline.user,
-         password:this.formInline.password
-       }
-     }).then(
-       res => {
-         console.log(res)
-       }
-     ).catch(
-       err => {
-         console.log(err)
-       }
-     )*/
+
     axios.get('/apis/login',{
-      username:this.formInline.user,
-      password:this.formInline.password
+      params:
+        {username:this.formInline.user,
+      password:this.formInline.password}
     }).then(
       res => {
         console.log(res)
-      }
+        let status=res.data.status
+        //error
+        if(status==0)
+        {
+          this.error=true
+        }
+        //admin
+        else {
+          if (status == 2) {
+            this.error = false
+            this.userId = res.data.user.user_ID
+          }
+          //user
+          else if (status == 1) {
+            this.error = false
+            this.userId = res.data.user.user_ID
+
+          }
+          //存入全局变量
+          this.GLOBAL.email = res.data.user.email
+          this.GLOBAL.password = res.data.user.password
+          this.GLOBAL.phone = res.data.user.phone
+          this.GLOBAL.role = res.data.user.role
+          this.GLOBAL.user_ID = res.data.user.user_ID
+          this.GLOBAL.user_Name = res.data.user.user_Name
+          this.$router.replace('/user/'+this.userId+'/home')
+        }
+        }
+
+
     ).catch(
       err => {
           console.log(err)
       })
- /*      this.$router.replace('/user/'+this.userId+'/home')*/
+
       },
       handleRegister(){
         this.$router.replace('/register')

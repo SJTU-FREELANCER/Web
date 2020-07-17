@@ -19,6 +19,7 @@
   </Form>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data () {
       return {
@@ -57,13 +58,30 @@
     },
     methods: {
       handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
+        //这是什么意思？
+     /*   this.$refs[name].validate((valid) => {
           if (valid) {
             this.$Message.success('Success!');
           } else {
             this.$Message.error('Fail!');
           }
-        })
+        })*/
+     axios.post('/apis/register',{
+       username:this.formValidate.name,
+       password:this.formValidate.password,
+       email:this.formValidate.mail,
+       phone:this.formValidate.phone
+     }).then(
+       res => {
+         console.log(res)
+       }
+     ).catch(
+       err => {
+         console.log(err)
+       }
+     )
+     //sumbit
+        this.$router.replace('/login')
       },
       handleReset (name) {
         this.$refs[name].resetFields();
