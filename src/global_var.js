@@ -5,7 +5,5 @@ export default {
   role: Boolean,
   userName: '',
   user_ID: Number,
-  user_Name: '',
-  jobs_list: [],
-  applicants_list: []
+  user_Name: ''
 }

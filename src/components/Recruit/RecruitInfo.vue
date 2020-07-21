@@ -17,8 +17,8 @@
 </template>
 
 <script>
-  import filterInput from "./filterInput";
-  import R_card from "./R_card";
+  import filterInput from "./cpn/filterInput";
+  import R_card from "./cpn/R_card";
   import axios from 'axios'
   export default {
     data: function() {

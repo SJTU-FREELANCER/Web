@@ -30,23 +30,26 @@
         </Dropdown>
 
 
-        <Dropdown class="menu-item">
+        <Dropdown class="menu-item" @on-click="my_recruit($event)">
           <a href="javascript:void(0)" @click="recruitClick">
             我要招聘
-            <!--<Icon type="ios-arrow-down"></Icon>-->
+            <Icon type="ios-arrow-down"></Icon>
           </a>
-
+          <DropdownMenu slot="list">
+            <DropdownItem name="my_recruit">我的招聘信息</DropdownItem>
+            <DropdownItem name="new_recruit">新增招聘信息</DropdownItem>
+          </DropdownMenu>
         </Dropdown>
 
 
         <Dropdown class="menu-item" @on-click="apply($event)">
           <a href="javascript:void(0)" @click="applyClick">
             我要求职
-            <!--<Icon type="ios-arrow-down"></Icon>-->
+            <Icon type="ios-arrow-down"></Icon>
           </a>
-     <!--     <DropdownMenu slot="list">
-            <DropdownItem name="resume"></DropdownItem>
-          </DropdownMenu>-->
+          <DropdownMenu slot="list">
+            <DropdownItem name="my_apply">我的求职申请</DropdownItem>
+          </DropdownMenu>
         </Dropdown>
 
 
@@ -99,6 +102,10 @@
       },
       recruitClick: function () {
         this.$router.replace('/user/' + this.userId + '/recruitInfo')
+      },
+      my_recruit:function(name){
+        if(name=='my_recruit') this.$router.replace('my_recruit_info')
+        if(name=='new_recruit') this.$router.replace('new_recruit')
       },
       applyClick: function () {
         this.$router.replace('/user/' + this.userId + '/applyInfo')

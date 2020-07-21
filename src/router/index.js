@@ -11,6 +11,8 @@ import Resume from "../components/Personal/Resume";
 import User from "../components/User";
 import ApplyInfo from "../components/Apply/ApplyInfo";
 import RecruitInfo from "../components/Recruit/RecruitInfo";
+import myRecruitInfo from "../components/Recruit/myRecruitInfo";
+import new_recruit from "../components/Recruit/new_recruit";
 
 Vue.use(Router)
 const originalPush = Router.prototype.push
@@ -70,6 +72,14 @@ export default new Router({
         {
           path: 'applyInfo',
           component: ApplyInfo
+        },
+        {
+          path:'my_recruit_info',
+          component:myRecruitInfo
+        },
+        {
+          path:'new_recruit',
+          component:new_recruit
         }
       ]
     }

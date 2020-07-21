@@ -9,7 +9,7 @@
     <slot name="experience"></slot>
     <slot name="education"></slot>
 
-    <slot name="tags"></slot>
+
     <div slot="extra" v-show="isShow">
       <v-button type="primary" @click="app">申请</v-button>
       <v-button type="danger">详情</v-button>
@@ -21,14 +21,14 @@
   export default {
     data: function () {
       return {
-        isShow: false,
-        t: ''
+        isShow: false
       }
     },
     methods: {
       changeShow() {
         this.isShow = !this.isShow;
       },
+      //申请工作
       app(){
         axios.get('/apis/add_apply_info',{
           params:{
