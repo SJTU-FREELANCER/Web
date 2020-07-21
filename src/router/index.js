@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Login from "../components/Login"
 import Recruit from "../components/Recruit/RecruitInfo";
 import home from "../components/Home/home";
-import Profile from "../components/Profile";
 import Register from "../components/Register";
 import ApplyHome from "../components/Personal/ResumeDisplay";
 import personalInfo from "../components/Personal/personalInfo";
@@ -12,8 +11,12 @@ import Resume from "../components/Personal/Resume";
 import User from "../components/User";
 import ApplyInfo from "../components/Apply/ApplyInfo";
 import RecruitInfo from "../components/Recruit/RecruitInfo";
-Vue.use(Router)
 
+Vue.use(Router)
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 export default new Router({
   routes: [
     {
@@ -26,71 +29,51 @@ export default new Router({
       component: Login
     },
     {
-      path:'/recruit',
-      component:Recruit
+      path: '/recruit',
+      component: Recruit
     },
     {
-      path:'/apply',
-      component:ApplyHome
+      path: '/apply',
+      component: ApplyHome
     },
     {
-      path:'/profile',
-      component:Profile
+      path: '/register',
+      component: Register
     },
     {
-      path:'/register',
-      component:Register
-    },
-   /* {
-      path:'/user/:userId/personalInfo',
-      component:personalInfo
-    },
-    {
-      path:'/user/:userId/resumeDisplay',
-      component:ResumeDisplay
-    },
-    {
-      path:'/user/:userId/home',
-      component:home
-    },
-    {
-      path:'/user/:userId/resume',
-      component:Resume
-    },*/
-    {
-      path:'/user/:userId',
-      component:User,
+      path: '/user/:userId',
+      component: User,
       meta: {
         title: '用户'
       },
-      children:[
+      children: [
         {
-          path:'personalInfo',
-          component:personalInfo
+          path: 'personalInfo',
+          component: personalInfo
         },
         {
-          path:'resumeDisplay',
-          component:ResumeDisplay
+          path: 'resumeDisplay',
+          component: ResumeDisplay
         },
         {
-          path:'home',
-          component:home
+          path: 'home',
+          component: home
         },
         {
-          path:'resume',
-          component:Resume
+          path: 'resume',
+          component: Resume
         },
         {
-          path:'recruitInfo',
-          component:RecruitInfo
+          path: 'recruitInfo',
+          component: RecruitInfo
         },
         {
-          path:'applyInfo',
-          component:ApplyInfo
+          path: 'applyInfo',
+          component: ApplyInfo
         }
       ]
     }
 
   ],
-  mode:'history'
+  mode: 'history'
 })

@@ -1,69 +1,65 @@
 <template>
   <div id="home">
-    <filterInput></filterInput>
+    <filterInput @filter="filterApp"></filterInput>
 
-
-    <v-card title="3600-4500  徐汇   公司保洁员/商场保洁员 保洁   工作时间：7:30-16:30"
-            @mouseleave.native="changeShow" @mouseenter.native="changeShow">
-
-      <p>工作内容：</p>
-      <p>1.负责公司旗舰体验中心日常保洁工作，保持指定区域干净整洁；
-        2.帮忙打扫咖啡吧区域卫生，协助收拾整理会议室等；
-        3.合理使用和放置保洁用具；
-        4.其他上级领导安排的保洁相关事宜。</p>
-      <p>职位要求：</p>
-      <p>1.年龄在45岁左右，商场保洁员经验2年以上；
-        2.按照公司标准要求穿着服装；
-        3.爱干净，勤快，有服务意识，无不良嗜好；
-        4.普通话无明显口音。</p>
-      <p>工作时间：7:30-16:30</p>
-      <v-tag color="cyan">广告</v-tag>
-      <v-tag color="orange">五险一金</v-tag>
-
-      <div slot="extra" >
-        <v-button type="primary">申请</v-button>
-        <v-button type="Info">详情</v-button>
-      </div>
-    </v-card>
-
-    <v-card title="Card title" @mouseleave.native="changeShow" @mouseenter.native="changeShow">
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-      <div slot="extra" >
-        <v-button type="primary">申请</v-button>
-        <v-button type="Info">详情</v-button>
-      </div>
-    </v-card>
-    <v-card title="Card title" @mouseleave.native="changeShow" @mouseenter.native="changeShow">
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-      <div slot="extra" >
-        <v-button type="primary">申请</v-button>
-        <v-button type="Info">详情</v-button>
-      </div>
-    </v-card>
+    <R_card v-for="(item,index) in this.list" :key="index">
+    <p slot="name">姓名：{{item.name}}</p>
+      <p slot="gender">性别：{{item.gender?'female':'male'}}</p>
+      <p slot="birth">生日：{{item.birth}} </p>
+      <p slot="experience">个人经历：{{item.experience}}</p>
+      <p slot="education">教育： {{item.education}}</p>
+    </R_card>
     <v-pagination id="page" show-quick-jumper :total="500"></v-pagination>
+
+
   </div>
 
 </template>
 
 <script>
-  import filterInput from "../filterInput";
+  import filterInput from "./filterInput";
+  import R_card from "./R_card";
+  import axios from 'axios'
   export default {
     data: function() {
       return {
-        isShow:false
+        isShow:false,
+        list:[]
       }
     },
     components:{
+      R_card,
       filterInput
     },
     methods: {
-      changeShow(){
-        this.isShow = !this.isShow;
-      },
+ filterApp(){
+   let tmp=this.$children[0].formItem
+   axios.get('/apis/filt_applications',{
+     params:{
+       experience:tmp.experience,
+       education:tmp.education
+     }
+   }).then(
+     res => {
+       this.list=res.data
+     }
+   ).catch(
+     err => {
+       console.log(err);
+     }
+   )
+ }
+    },
+    created() {
+      axios.get('/apis/get_applicants').then(
+        res => {
+          this.list=res.data
+        }
+      ).catch(
+        err => {
+          console.log(err)
+        }
+      )
     }
   }
 </script>

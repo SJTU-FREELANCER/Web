@@ -1,6 +1,6 @@
 <template>
-  <div >
-<router-view></router-view>
+  <div>
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -10,27 +10,21 @@
   import MyResume from "./components/MyResume"
   import Register from "./components/Register";
   import personalInfo from "./components/Personal/personalInfo";
-  import test from "./components/test";
 
-export default {
-  name: 'App',
-  data(){
-    return{
-
-    }
-  },
-  components:{
-   Register,
-    MyResume,
-    Menu,
-    Login,
-    Resume,
-    personalInfo,
-    test
-  },
-  methods:{
-
-    }
+  export default {
+    name: 'App',
+    data() {
+      return {}
+    },
+    components: {
+      Register,
+      MyResume,
+      Menu,
+      Login,
+      Resume,
+      personalInfo
+    },
+    methods: {}
   }
 
 </script>

@@ -70,18 +70,19 @@
        username:this.formValidate.name,
        password:this.formValidate.password,
        email:this.formValidate.mail,
-       phone:this.formValidate.phone
+       address:this.formValidate.phone
      }).then(
        res => {
-         console.log(res)
+         if(res.status==1)
+           //sumbit
+           this.$router.replace('/login')
        }
      ).catch(
        err => {
          console.log(err)
        }
      )
-     //sumbit
-        this.$router.replace('/login')
+
       },
       handleReset (name) {
         this.$refs[name].resetFields();

@@ -4,13 +4,11 @@
 <template>
   <div id="info">
     <v-card title="基本信息" @mouseleave.native="changeShow" @mouseenter.native="changeShow">
-      <p>姓名：</p>
-      <p>出生日期：</p>
-      <p>电话：</p>
-      <p>邮箱：</p>
+      <p>姓名：{{this.GLOBAL.user_Name}}</p>
+      <p>电话：{{this.GLOBAL.phone}}</p>
+      <p>邮箱：{{this.GLOBAL.email}}</p>
       <div slot="extra" v-show="isShow">
-        <v-button type="primary">编辑</v-button>
-        <v-button type="danger">删除</v-button>
+        <v-button type="primary" >编辑</v-button>
       </div>
     </v-card>
     <v-card title="招聘信息" >

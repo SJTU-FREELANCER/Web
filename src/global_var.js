@@ -1,10 +1,11 @@
 export default {
-  email:'',
+  email: '',
   password: '',
-  phone:'',
-  role:Boolean ,
+  phone: '',
+  role: Boolean,
   userName: '',
-  user_ID:Number ,
+  user_ID: Number,
   user_Name: '',
-  jobs_list:[]
+  jobs_list: [],
+  applicants_list: []
 }

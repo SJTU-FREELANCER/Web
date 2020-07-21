@@ -32,23 +32,21 @@
 
         <Dropdown class="menu-item">
           <a href="javascript:void(0)" @click="recruitClick">
-            招聘
-            <Icon type="ios-arrow-down"></Icon>
+            我要招聘
+            <!--<Icon type="ios-arrow-down"></Icon>-->
           </a>
-          <DropdownMenu slot="list">
-            <DropdownItem></DropdownItem>
-          </DropdownMenu>
+
         </Dropdown>
 
 
         <Dropdown class="menu-item" @on-click="apply($event)">
           <a href="javascript:void(0)" @click="applyClick">
-            求职
-            <Icon type="ios-arrow-down"></Icon>
+            我要求职
+            <!--<Icon type="ios-arrow-down"></Icon>-->
           </a>
-          <DropdownMenu slot="list">
+     <!--     <DropdownMenu slot="list">
             <DropdownItem name="resume"></DropdownItem>
-          </DropdownMenu>
+          </DropdownMenu>-->
         </Dropdown>
 
 
@@ -58,14 +56,14 @@
             <Icon type="ios-arrow-down"></Icon>
           </a>
           <DropdownMenu slot="list">
-            <DropdownItem  name="info">个人信息</DropdownItem>
+            <DropdownItem name="info">个人信息</DropdownItem>
             <DropdownItem name="resume">我的简历</DropdownItem>
             <DropdownItem name="exit">退出账号</DropdownItem>
           </DropdownMenu>
         </Dropdown>
 
         <Dropdown class="menu-item">
-           你好，{{ this.GLOBAL.user_Name}}
+          你好，{{ this.GLOBAL.user_Name}}
         </Dropdown>
 
       </div>
@@ -74,49 +72,46 @@
   </div>
 
 
-
-
 </template>
 <script>
-export default {
-  name:"Menu",
-  data(){
-    return{
+  export default {
+    name: "Menu",
+    data() {
+      return {}
+    },
+    computed: {
+      userId() {
+        return this.$route.params.userId
+      }
+    },
+    methods: {
+      personalClick: function (name) {
+        if (name == 'info') this.$router.replace('personalInfo')
+        if (name == 'resume') this.$router.replace('resumeDisplay')
+        if (name == 'exit') this.$router.replace('/login')
 
-    }
-  },
-  computed:{
-    userId(){
-      return this.$route.params.userId
-    }
-  },
-  methods:{
-    personalClick:function (name) {
-      if(name=='info') this.$router.replace('personalInfo')
-      if(name=='resume') this.$router.replace('resumeDisplay')
-
-    },
-    apply:function(name){
-      if(name=='resume')  this.$router.replace('resumeDisplay')
-    },
-    homeClick:function(){
-      this.$router.replace('/user/'+this.userId+'/home')
-    },
-    recruitClick:function(){
-      this.$router.replace('/user/'+this.userId+'/recruitInfo')
-    },
-    applyClick:function () {
-        this.$router.replace('/user/'+this.userId+'/applyInfo')
-    },
-    profileClick:function () {
-       this.$router.replace('/profile')
+      },
+      apply: function (name) {
+        if (name == 'resume') this.$router.replace('resumeDisplay')
+      },
+      homeClick: function () {
+        this.$router.replace('/user/' + this.userId + '/home')
+      },
+      recruitClick: function () {
+        this.$router.replace('/user/' + this.userId + '/recruitInfo')
+      },
+      applyClick: function () {
+        this.$router.replace('/user/' + this.userId + '/applyInfo')
+      },
+      profileClick: function () {
+        this.$router.replace('/profile')
+      }
     }
   }
-}
 
 </script>
 <style>
-  #app{
+  #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -124,19 +119,23 @@ export default {
     color: #2c3e50;
 
   }
+
   .menu {
 
     display: flex;
 
 
   }
-  .menu-item{
+
+  .menu-item {
     font-size: large;
     text-align: center;
     flex: 1;
-    height: 49px;margin-top: 50px;
+    height: 49px;
+    margin-top: 50px;
   }
- .img-item{
-   top:0;
- }
+
+  .img-item {
+    top: 0;
+  }
 </style>
