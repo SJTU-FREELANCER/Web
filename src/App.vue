@@ -6,7 +6,7 @@
 <script>
   import Menu from './components/Menu'
   import Login from "./components/Login"
-  import Resume from "./components/Personal/Resume";
+  import Resume from "./components/Personal/alterResume";
   import MyResume from "./components/MyResume"
   import Register from "./components/Register";
   import personalInfo from "./components/Personal/personalInfo";

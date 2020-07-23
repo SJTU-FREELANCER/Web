@@ -24,7 +24,11 @@
     data: function() {
       return {
         isShow:false,
-        list:[]
+        list:[],
+        Info:{
+          page:0,
+          list:[]
+        }
       }
     },
     components:{

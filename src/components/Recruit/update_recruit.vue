@@ -1,8 +1,11 @@
 <!--
-新增招聘信息
+修改招聘信息
+能不能重复使用之前的组件？
+不能将之前招聘信息的信息填上去
 -->
 <template>
   <div id="new_recruit">
+    <h2 style="text-align: center">修改招聘信息</h2>
     <Form :model="formItem" :label-width="80">
       <Row>
         <Col span="12">
@@ -89,31 +92,51 @@
         }
       }
     },
+/*  props:{
+    formItem:{
+      salary: '',
+      location:'',
+      title:'',
+      schedule:'',
+      cate:'',
+      quote:'',
+      desc:'',
+      experience:'',
+      education:''
+    }
+  },*/
     methods:{
+      //修改招聘信息
+      //rec_id从vuex里找
       handleSubmit(){
-        axios.get('/apis/create_job',{
+        let tmp=this.formItem
+        axios.get('/apis/update_rec',{
           params:{
-            userid:this.GLOBAL.user_ID,
-            salary: this.formItem.salary,
-            location:this.formItem.location,
-            title:this.formItem.title,
-            schedule:this.formItem.schedule,
-            cate:this.formItem.cate,
-            quota:this.formItem.quote,
-            desc:this.formItem.desc,
-            exp:this.formItem.experience,
-            edu:this.formItem.education
+            rec_ID:this.$store.state.rec_on_changing.rec_ID,
+            user_ID:this.GLOBAL.user_ID,
+            rec_Salary:tmp.salary,
+            rec_Location:tmp.location,
+            rec_TimeSchedule:tmp.schedule,
+            rec_Title:tmp.title,
+            rec_Cate:tmp.cate,
+            rec_Enrolled:'2',
+            rec_Quota:tmp.quote,
+            rec_Desc:tmp.desc,
+            rec_Experience:tmp.experience,
+            rec_Education:tmp.education
           }
         }).then(
           res => {
             console.log(res);
+            this.$router.replace('my_recruit_info')
           }
+
         ).catch(
           err => {
             console.log(err);
           }
         )
-        this.$router.replace('my_recruit_info')
+
       }
     }
   }

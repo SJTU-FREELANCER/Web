@@ -6,10 +6,11 @@ import router from './router'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import Global from './global_var'
-
+import store from "./store";
 Vue.config.productionTip = false
 //Vue.use(router);
 Vue.use(ViewUI);
+
 Vue.prototype.GLOBAL = Global
 //import css
 import 'vue-beauty/package/style/vue-beauty.min.css'
@@ -22,6 +23,7 @@ Vue.use(vueBeauty)
 let root = new Vue({
   el: '#app',
   router,
+  store,
   components: {App},
   template: '<App/>'
 })

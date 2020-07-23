@@ -16,8 +16,8 @@
 </template>
 
 <script>
-  import myCard from "./myCard";
-  import app_filter from "./app_filter";
+  import myCard from "./cpn/myCard";
+  import app_filter from "./cpn/app_filter";
   import axios from 'axios'
 
   export default {

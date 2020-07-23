@@ -1,3 +1,6 @@
+<!--
+展示我的招聘信息
+-->
 <template>
 <div id="recruit">
   <my_rec_card v-for="(item,index) in this.mylist" :key="index" :rtitle="item.rec_Title"

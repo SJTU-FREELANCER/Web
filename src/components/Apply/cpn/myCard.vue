@@ -1,3 +1,6 @@
+<!--
+展示所有人的招聘信息
+-->
 <template>
   <v-card id="card" :title="this.rtitle" @mouseleave.native="changeShow" @mouseenter.native="changeShow">
     <slot name="salary"></slot>

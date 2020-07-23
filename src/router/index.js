@@ -1,18 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from "../components/Login"
-import Recruit from "../components/Recruit/RecruitInfo";
+import Recruit from "../components/Recruit/Recruit";
 import home from "../components/Home/home";
 import Register from "../components/Register";
-import ApplyHome from "../components/Personal/ResumeDisplay";
+import ApplyHome from "../components/Personal/myResume";
 import personalInfo from "../components/Personal/personalInfo";
-import ResumeDisplay from "../components/Personal/ResumeDisplay";
-import Resume from "../components/Personal/Resume";
+import ResumeDisplay from "../components/Personal/myResume";
+import Resume from "../components/Personal/alterResume";
 import User from "../components/User";
-import ApplyInfo from "../components/Apply/ApplyInfo";
-import RecruitInfo from "../components/Recruit/RecruitInfo";
+import ApplyInfo from "../components/Apply/Apply";
+import RecruitInfo from "../components/Recruit/Recruit";
 import myRecruitInfo from "../components/Recruit/myRecruitInfo";
 import new_recruit from "../components/Recruit/new_recruit";
+import update_recruit from "../components/Recruit/update_recruit";
 
 Vue.use(Router)
 const originalPush = Router.prototype.push
@@ -80,6 +81,9 @@ export default new Router({
         {
           path:'new_recruit',
           component:new_recruit
+        },{
+        path:'update_recruit',
+          component:update_recruit
         }
       ]
     }
