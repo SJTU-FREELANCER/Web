@@ -1,3 +1,6 @@
+<!--
+登录界面
+-->
 <template>
   <div>
     <Form ref="formInline" :model="formInline" :rules="ruleInline" inline id="login">
