@@ -14,8 +14,8 @@
 
 
     <div slot="extra" v-show="isShow">
-      <v-button type="primary" @click="app">申请</v-button>
-      <v-button type="danger">详情</v-button>
+      <v-button type="primary" @click="app" :disabled="disabled">申请</v-button>
+     <!-- <v-button type="danger" @click="delete_app">删除</v-button>-->
     </div>
   </v-card>
 </template>
@@ -24,7 +24,8 @@
   export default {
     data: function () {
       return {
-        isShow: false
+        isShow: false,
+        disabled:false
       }
     },
     methods: {
@@ -41,12 +42,23 @@
         }).then(
           res => {
             console.log(res);
+
           }
         ).catch(
           err => {
             console.log(err);
           }
         )
+        this.disabled=true
+      },
+      //取消求职申请
+      delete_app(){
+        axios.get('/apis/delete_apply_info',{
+          params:{
+            user_id:this.GLOBAL.user_ID,
+            rec_id:this.rec_id
+          }
+        })
       }
 
     },

@@ -1,8 +1,12 @@
+<!--
+我要招聘的页面
+-->
 <template>
   <div id="home">
     <filterInput @filter="filterApp"></filterInput>
 
-    <R_card v-for="(item,index) in this.list" :key="index">
+    <R_card v-for="(item,index) in this.list" :key="index"
+    :userid="item.user_ID">
     <p slot="name">姓名：{{item.name}}</p>
       <p slot="gender">性别：{{item.gender?'female':'male'}}</p>
       <p slot="birth">生日：{{item.birth}} </p>
@@ -38,7 +42,7 @@
     methods: {
  filterApp(){
    let tmp=this.$children[0].formItem
-   axios.get('/apis/filt_applications',{
+   axios.get('/apis/filt_applicants',{
      params:{
        experience:tmp.experience,
        education:tmp.education
@@ -62,6 +66,21 @@
       ).catch(
         err => {
           console.log(err)
+        }
+      )
+
+      //先把我发布的的所有招聘信息取出来放在全局变量
+      axios.get('/apis/getRecbyId',{
+        params:{
+          userid:this.GLOBAL.user_ID
+        }
+      }).then(
+        res => {
+          this.GLOBAL.myRecInfo=res.data
+        }
+      ).catch(
+        err => {
+          console.log(err);
         }
       )
     }

@@ -23,6 +23,7 @@
 <script>
   import axios from 'axios'
   export default {
+    inject: ['reload'],
     data: function() {
       return {
         isShow:false
@@ -56,7 +57,7 @@
           console.log(err);
         }
       )
-        this.$router.replace('my_recruit_info')
+     this.reload()
       }
     },
     created() {

@@ -14,6 +14,10 @@ import RecruitInfo from "../components/Recruit/Recruit";
 import myRecruitInfo from "../components/Recruit/myRecruitInfo";
 import new_recruit from "../components/Recruit/new_recruit";
 import update_recruit from "../components/Recruit/update_recruit";
+import myApplyInfo from "../components/Apply/myApplyInfo";
+import myApplicants from "../components/Recruit/myApplicants";
+import Employees from "../components/Recruit/Employees";
+import Mymessage from "../components/Apply/Mymessage";
 
 Vue.use(Router)
 const originalPush = Router.prototype.push
@@ -84,6 +88,22 @@ export default new Router({
         },{
         path:'update_recruit',
           component:update_recruit
+        },
+        {
+          path:'my_apply_info',
+          component:myApplyInfo
+        },
+        {
+          path:'my_applicants',
+          component:myApplicants
+        },
+        {
+          path:'employees',
+          component:Employees
+        },
+        {
+          path:'my_message',
+          component:Mymessage
         }
       ]
     }

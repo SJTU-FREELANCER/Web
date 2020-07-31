@@ -7,26 +7,36 @@
     <slot name="experience"></slot>
     <slot name="education"></slot>
     <div slot="extra" v-show="isShow">
-      <v-button type="primary">招聘</v-button>
+      <!--<v-button type="primary" @click="recruit">招聘</v-button>-->
+      <choose :userid="this.userid"></choose>
     </div>
   </v-card>
 </template>
 <script>
+  import axios from 'axios'
+  import choose from "./choose";
   export default {
     data: function() {
       return {
         isShow:false
       }
     },
+    components:{
+      choose
+    },
     methods: {
-      changeShow(){
-        this.isShow = !this.isShow;
-      },
+        changeShow(){
+          this.isShow = !this.isShow;
+        },
+      recruit(){
+        //需要去选择招聘信息
+
+      }
     },
     created() {
 
     },
-    prop:{
+    props:{
       desInfo:{
         type: Object
       },
@@ -36,6 +46,9 @@
       recTitle:{
         type: String,
         default: ''
+      },
+      userid:{
+        type:Number
       }
     }
   }

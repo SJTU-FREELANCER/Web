@@ -6,7 +6,7 @@
     <Form :model="formItem" :label-width="80">
       <Row>
         <Col span="12">
-          <FormItem label="Title">
+          <FormItem label="Title" id="title">
             <Input v-model="formItem.title" placeholder="Enter something..."></Input>
           </FormItem>
 
@@ -73,6 +73,7 @@
 <script>
   import axios from 'axios'
   export default {
+    inject: ['reload'],
     data () {
       return {
         formItem: {
@@ -114,6 +115,7 @@
           }
         )
         this.$router.replace('my_recruit_info')
+        this.reload()
       }
     }
   }

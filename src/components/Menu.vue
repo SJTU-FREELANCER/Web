@@ -15,7 +15,6 @@
   <div class="tab-bar-item">个人中心</div>
 </div>-->
     <v-affix>
-
       <div class="menu">
         <Dropdown class="img-item">
           <img src="../assets/img/deer.jpg" alt="can't load" width="100" height="100">
@@ -31,13 +30,19 @@
 
 
         <Dropdown class="menu-item" @on-click="my_recruit($event)">
-          <a href="javascript:void(0)" @click="recruitClick">
+          <a href="javascript:void(0)" @click="recruitClick" id="Irecruit">
             我要招聘
             <Icon type="ios-arrow-down"></Icon>
           </a>
           <DropdownMenu slot="list">
-            <DropdownItem name="my_recruit">我的招聘信息</DropdownItem>
-            <DropdownItem name="new_recruit">新增招聘信息</DropdownItem>
+            <DropdownItem name="my_recruit" id="my_recruit">我发布的招聘信息</DropdownItem>
+            <DropdownItem name="new_recruit" id="new_recruit">新增招聘信息</DropdownItem>
+            <DropdownItem name="my_applicants">我的应聘者</DropdownItem>
+            <DropdownItem name="employees" id="employees">我的招聘请求</DropdownItem>
+
+            <!--未完成-->
+            <DropdownItem name="employees">我的员工</DropdownItem>
+
           </DropdownMenu>
         </Dropdown>
 
@@ -49,6 +54,7 @@
           </a>
           <DropdownMenu slot="list">
             <DropdownItem name="my_apply">我的求职申请</DropdownItem>
+            <DropdownItem name="my_message">我的消息</DropdownItem>
           </DropdownMenu>
         </Dropdown>
 
@@ -95,7 +101,8 @@
 
       },
       apply: function (name) {
-        if (name == 'resume') this.$router.replace('resumeDisplay')
+        if (name == 'my_apply') this.$router.replace('my_apply_info')
+        if (name == 'my_message') this.$router.replace('my_message')
       },
       homeClick: function () {
         this.$router.replace('/user/' + this.userId + '/home')
@@ -106,12 +113,14 @@
       my_recruit:function(name){
         if(name=='my_recruit') this.$router.replace('my_recruit_info')
         if(name=='new_recruit') this.$router.replace('new_recruit')
+        if(name=='my_applicants') this.$router.replace('my_applicants')
+        if(name=='employees') this.$router.replace('employees')
       },
       applyClick: function () {
         this.$router.replace('/user/' + this.userId + '/applyInfo')
       },
       profileClick: function () {
-        this.$router.replace('/profile')
+        // this.$router.replace('/profile')
       }
     }
   }
@@ -131,8 +140,6 @@
   .menu {
 
     display: flex;
-
-
   }
 
   .menu-item {

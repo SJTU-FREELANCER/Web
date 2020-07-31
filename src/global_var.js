@@ -5,5 +5,6 @@ export default {
   role: Boolean,
   userName: '',
   user_ID: Number,
-  user_Name: ''
+  user_Name: '',
+  myRecInfo:[]
 }
