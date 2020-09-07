@@ -36,8 +36,11 @@
       app(){
         axios.get('/apis/add_apply_info',{
           params:{
-            user_id:this.GLOBAL.user_ID,
+            user_id:localStorage.getItem('user_ID'),
             rec_id:this.rec_id
+          },
+          headers:{
+            Authorization:'Bearer '+localStorage.getItem('token')
           }
         }).then(
           res => {
@@ -55,10 +58,21 @@
       delete_app(){
         axios.get('/apis/delete_apply_info',{
           params:{
-            user_id:this.GLOBAL.user_ID,
+            user_id:localStorage.getItem('user_ID'),
             rec_id:this.rec_id
+          },
+          headers:{
+            Authorization:'Bearer '+localStorage.getItem('token')
           }
-        })
+        }).then(
+          res => {
+
+          }
+        ).catch(
+          err => {
+
+          }
+        )
       }
 
     },

@@ -113,7 +113,7 @@
         axios.get('/apis/update_rec',{
           params:{
             rec_ID:this.$store.state.rec_on_changing.rec_ID,
-            user_ID:this.GLOBAL.user_ID,
+            user_ID:localStorage.getItem('user_ID'),
             rec_Salary:tmp.salary,
             rec_Location:tmp.location,
             rec_TimeSchedule:tmp.schedule,
@@ -124,6 +124,9 @@
             rec_Desc:tmp.desc,
             rec_Experience:tmp.experience,
             rec_Education:tmp.education
+          },
+          headers:{
+            Authorization:'Bearer '+localStorage.getItem('token')
           }
         }).then(
           res => {

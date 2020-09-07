@@ -11,10 +11,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/apis': {    //将www.exaple.com印射为/apis
-        target: 'http://localhost:8080',  // 接口域名
+      '/apis': {    //将www.example.com印射为/apis
+        /*target: 'http://localhost:8080',  // 接口域名*/
+        target: 'http://ec2-3-17-140-221.us-east-2.compute.amazonaws.com:8080',  // 接口域名
         secure: false,  // 如果是https接口，需要配置这个参数
-        changeOrigin: false,  //是否跨域
+        changeOrigin: true,  //是否跨域
         pathRewrite: {
           '^/apis': ''   //需要rewrite的,
         }
@@ -23,7 +24,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

@@ -39,9 +39,9 @@
             <DropdownItem name="new_recruit" id="new_recruit">新增招聘信息</DropdownItem>
             <DropdownItem name="my_applicants">我的应聘者</DropdownItem>
             <DropdownItem name="employees" id="employees">我的招聘请求</DropdownItem>
-
-            <!--未完成-->
-            <DropdownItem name="employees">我的员工</DropdownItem>
+<!--
+            未完成
+            <DropdownItem name="employees" id="mymember">我的员工</DropdownItem>-->
 
           </DropdownMenu>
         </Dropdown>
@@ -72,7 +72,7 @@
         </Dropdown>
 
         <Dropdown class="menu-item">
-          你好，{{ this.GLOBAL.user_Name}}
+          你好，{{ name }}
         </Dropdown>
 
       </div>
@@ -86,7 +86,9 @@
   export default {
     name: "Menu",
     data() {
-      return {}
+      return {
+        name:localStorage.getItem('userName')
+      }
     },
     computed: {
       userId() {
@@ -95,29 +97,33 @@
     },
     methods: {
       personalClick: function (name) {
-        if (name == 'info') this.$router.replace('personalInfo')
-        if (name == 'resume') this.$router.replace('resumeDisplay')
+        if (name == 'info') this.$router.replace('/user/personalInfo')
+        if (name == 'resume') this.$router.replace('/user/resumeDisplay')
         if (name == 'exit') this.$router.replace('/login')
 
       },
       apply: function (name) {
-        if (name == 'my_apply') this.$router.replace('my_apply_info')
-        if (name == 'my_message') this.$router.replace('my_message')
+        if (name == 'my_apply') this.$router.replace('/user/my_apply_info')
+        if (name == 'my_message') this.$router.replace('/user/my_message')
       },
       homeClick: function () {
-        this.$router.replace('/user/' + this.userId + '/home')
+        /*this.$router.replace('/user/' + this.userId + '/home')*/
+        this.$router.replace('/user/' + 'home')
       },
       recruitClick: function () {
-        this.$router.replace('/user/' + this.userId + '/recruitInfo')
+       /* this.$router.replace('/user/' + this.userId + '/recruitInfo')*/
+        this.$router.replace('/user/' + 'recruitInfo')
       },
       my_recruit:function(name){
-        if(name=='my_recruit') this.$router.replace('my_recruit_info')
-        if(name=='new_recruit') this.$router.replace('new_recruit')
-        if(name=='my_applicants') this.$router.replace('my_applicants')
-        if(name=='employees') this.$router.replace('employees')
+        if(name=='my_recruit') this.$router.replace('/user/my_recruit_info')
+        if(name=='new_recruit') this.$router.replace('/user/new_recruit')
+        if(name=='my_applicants') this.$router.replace('/user/my_applicants')
+        if(name=='employees') this.$router.replace('/user/employees')
+
       },
       applyClick: function () {
-        this.$router.replace('/user/' + this.userId + '/applyInfo')
+        /*this.$router.replace('/user/' + this.userId + '/applyInfo')*/
+        this.$router.replace('/user'+ '/applyInfo')
       },
       profileClick: function () {
         // this.$router.replace('/profile')

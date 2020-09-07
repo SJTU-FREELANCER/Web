@@ -12,20 +12,20 @@
 
         </Col>
         <Col span="12">
-          <FormItem label="Schedule">
+          <FormItem label="Schedule" id="schedule">
             <Input v-model="formItem.schedule" placeholder="Enter something..."></Input>
           </FormItem>
         </Col>
       </Row>
       <Row>
         <Col span="12">
-          <FormItem label="Salary">
+          <FormItem label="Salary" id="salary">
             <Input v-model="formItem.salary" placeholder="Enter something..."></Input>
           </FormItem>
 
         </Col>
         <Col span="12">
-          <FormItem label="Location">
+          <FormItem label="Location" id="location">
             <Input v-model="formItem.location" placeholder="Enter something..."></Input>
           </FormItem>
         </Col>
@@ -33,30 +33,30 @@
 
       <Row>
         <Col span="12">
-          <FormItem label="Cate">
+          <FormItem label="Cate" id="cate">
             <Input v-model="formItem.cate" placeholder="Enter something..."></Input>
           </FormItem>
 
         </Col>
         <Col span="12">
-          <FormItem label="Quote">
+          <FormItem label="Quote" id="quote">
             <Input v-model="formItem.quote" placeholder="Enter something..."></Input>
           </FormItem>
         </Col>
       </Row>
-      <FormItem label="Desc">
+      <FormItem label="Desc" id="desc">
         <Input v-model="formItem.desc" placeholder="Enter something..."></Input>
       </FormItem>
 
       <Row>
         <Col span="12">
-          <FormItem label="Experience">
+          <FormItem label="Experience" id="experience">
             <Input v-model="formItem.experience" placeholder="Enter something..."></Input>
           </FormItem>
 
         </Col>
         <Col span="12">
-          <FormItem label="Education">
+          <FormItem label="Education" id="education">
             <Input v-model="formItem.education" placeholder="Enter something..."></Input>
           </FormItem>
         </Col>
@@ -94,7 +94,7 @@
       handleSubmit(){
         axios.get('/apis/create_job',{
           params:{
-            userid:this.GLOBAL.user_ID,
+            userid:localStorage.getItem('user_ID'),
             salary: this.formItem.salary,
             location:this.formItem.location,
             title:this.formItem.title,
@@ -104,6 +104,9 @@
             desc:this.formItem.desc,
             exp:this.formItem.experience,
             edu:this.formItem.education
+          },
+          headers:{
+            Authorization:'Bearer '+localStorage.getItem('token')
           }
         }).then(
           res => {
@@ -115,7 +118,7 @@
           }
         )
         this.$router.replace('my_recruit_info')
-        this.reload()
+ /*       this.reload()*/
       }
     }
   }

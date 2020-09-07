@@ -20,13 +20,19 @@
       <FormItem>
         <Button type="primary" @click="handleRegister">Register</Button>
       </FormItem>
+<FormItem>
+  <Checkbox v-model="admin">以管理员身份登录</Checkbox>
+</FormItem>
 
     </Form>
+
+
+
 
   </div>
 </template>
 <script>
-  import {request} from "../network/request";
+
   import axios from 'axios'
 
   export default {
@@ -36,8 +42,9 @@
         formInline: {
           user: '',
           password: '',
-          error: false
+          error: false,
         },
+        admin:false,
         ruleInline: {
           user: [
             {required: true, message: 'Please fill in the user name', trigger: 'blur'}
@@ -60,42 +67,55 @@
           }
         })*/
 
-        axios.get('/apis/login', {
-          params:
-            {
-              username: this.formInline.user,
-              password: this.formInline.password
-            }
-        }).then(
+        axios.post('/apis/login', {
+
+  username: this.formInline.user,
+  password: this.formInline.password
+}
+        ).then(
           res => {
             console.log(res)
-            let status = res.data.status
-            //error
-            if (status == 0) {
-              this.error = true
-            }
-            //admin
-            else {
-              if (status == 2) {
-                this.error = false
-                this.userId = res.data.user.user_ID
-              }
-              //user
-              else if (status == 1) {
-                this.error = false
-                this.userId = res.data.user.user_ID
+            if(res.data.msg=="登陆成功"){
+              this.GLOBAL.token=res.data.token
+              this.GLOBAL.userName=res.data.username
+              localStorage.setItem('token',res.data.token)
+              axios.get(
+                '/apis/getUserbyUsername',{
+                  params:{
+                    username:this.GLOBAL.userName
+                  },
+                headers:{
+                  Authorization:'Bearer '+this.GLOBAL.token
+                }
+                }
+              ).then(
+                res => {
+                  console.log(res)
+                  //存在localStorage中
+                  localStorage.setItem('userName',res.data.userName)
+                  localStorage.setItem('email',res.data.email)
+                  localStorage.setItem('phone',res.data.phone)
+                  localStorage.setItem('role',res.data.role)
+                  localStorage.setItem('user_ID',res.data.user_ID)
 
-              }
+                  //跳转
+                 /* this.$router.replace('/user/'+res.data.user_ID)*/
+                  if(this.admin==false) this.$router.push('/user');
+                  else if(this.admin==true) this.$router.push('/admin')
 
-              //存入全局变量
-              this.GLOBAL.email = res.data.user.email
-              this.GLOBAL.password = res.data.user.password
-              this.GLOBAL.phone = res.data.user.phone
-              this.GLOBAL.role = res.data.user.role
-              this.GLOBAL.user_ID = res.data.user.user_ID
-              this.GLOBAL.user_Name = res.data.user.user_Name
-              this.$router.replace('/user/' + this.userId + '/home')
+                }
+              ).catch(
+                err => {
+                  console.log(err)
+                }
+              )
+              /*this.$router.replace('/user')*/
             }
+            else if(res.data.msg=="登录失败")
+            {
+
+            }
+
           }
         ).catch(
           err => {

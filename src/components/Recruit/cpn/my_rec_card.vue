@@ -47,6 +47,9 @@
       axios.get('/apis/delete_rec',{
         params:{
           rec_id:this.rec_id
+        },
+        headers:{
+          Authorization:'Bearer '+localStorage.getItem('token')
         }
       }).then(
         res => {

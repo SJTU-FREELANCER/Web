@@ -11,7 +11,8 @@
       <p slot="experience">经验：{{item.rec_Experience}}</p>
       <p slot="education">教育：{{item.rec_Education}}</p>
     </myCard>
-
+   <!-- <Page :total="150" @on-change="change()"/>-->
+    <Button type="primary" @click="change">More</Button>
   </div>
 </template>
 
@@ -24,7 +25,8 @@
     name: "ApplyInfo",
     data() {
       return {
-        list: []
+        list: [],
+        current:0
       }
     },
     components: {
@@ -36,9 +38,9 @@
       }
     },
     created() {
-      axios.get('/apis/get_jobs').then(
+      /*axios.get('/apis/get_jobs').then(
         res => {
-          /*this.GLOBAL.jobs_list=res*/
+          /!*this.GLOBAL.jobs_list=res*!/
           console.log(res)
           this.list = res.data
 
@@ -48,9 +50,46 @@
         err => {
           console.log(err)
         }
+      )*/
+      axios.get('/apis/get_jobs_page',{
+        params:{
+          page:0
+        }
+      }).then(
+        res => {
+
+          console.log(res)
+          this.list=this.list.concat(res.data)
+          console.log(this.list)
+
+        }
+      ).catch(
+        err => {
+          console.log(err)
+        }
       )
     },
     methods: {
+      change(){
+        this.current++
+        axios.get('/apis/get_jobs_page',{
+          params:{
+            page:this.current
+          }
+        }).then(
+          res => {
+
+            console.log(res)
+            this.list=this.list.concat(res.data)
+            console.log(this.list)
+
+          }
+        ).catch(
+          err => {
+            console.log(err)
+          }
+        )
+      },
       filterRec() {
         let tmp=this.$children[0].formItem
         console.log('?')
@@ -63,6 +102,9 @@
               title:tmp.title,
               experience:tmp.experience,
               education:tmp.education
+            },
+            headers:{
+              Authorization:'Bearer '+localStorage.getItem('token')
             }
           }).then(
             res => {

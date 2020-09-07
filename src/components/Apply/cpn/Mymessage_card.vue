@@ -56,9 +56,12 @@ accepted默认为0（未审核）
           //同意该招聘邀请
           axios.get('/apis/update_employ_info',{
             params:{
-              user_id:this.GLOBAL.user_ID,
+              user_id:localStorage.getItem('user_ID'),
             rec_id:this.rec_id,
             accepted:1
+            },
+            headers:{
+              Authorization:'Bearer '+localStorage.getItem('token')
             }
           }).then(
             res => {
@@ -77,9 +80,12 @@ accepted默认为0（未审核）
           //拒绝该招聘邀请
           axios.get('/apis/update_employ_info',{
             params:{
-              user_id:this.GLOBAL.user_ID,
+              user_id:localStorage.getItem('user_ID'),
               rec_id:this.rec_id,
               accepted:2
+            },
+            headers:{
+              Authorization:'Bearer '+localStorage.getItem('token')
             }
           }).then(
             res => {

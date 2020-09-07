@@ -34,10 +34,11 @@
     </FormItem>
     <FormItem label="Education">
       <RadioGroup v-model="formItem.education">
-        <Radio label="no limit">不限</Radio>
+       <!-- <Radio label="no limit">不限</Radio>
         <Radio label="high school">高中以下</Radio>
         <Radio label="junior college">大专</Radio>
-        <Radio label="graduate">本科</Radio>
+        <Radio label="graduate">本科</Radio>-->
+        <Input v-model="formItem.education" placeholder="Enter something..." style="width: 450px"></Input>
       </RadioGroup>
     </FormItem>
     <FormItem id="button">
@@ -70,16 +71,20 @@
         if(this.formItem.radio=='male') gender=true
         axios.get('/apis/alter_resume',{
           params:{
-            user_id:this.GLOBAL.user_ID,
+            user_id:localStorage.getItem('user_ID'),
             name:tmp.name,
             gender:gender,
             birth:tmp.birth,
             experience:tmp.experience,
             education:tmp.education
+          },
+          headers:{
+            Authorization:'Bearer '+localStorage.getItem('token')
           }
         }).then(
           res => {
             console.log(res);
+            this.$router.push('/user/resumeDisplay')
           }
         ).catch(
           err => {

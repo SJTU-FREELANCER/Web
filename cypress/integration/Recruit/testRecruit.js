@@ -1,7 +1,7 @@
 describe('My first test case for cypress',function(){
   it('招聘一个人',function(){
    //登录
-    cy.visit('http://localhost:8081/login') //访问url
+    cy.visit('http://localhost:8080/login') //访问url
     cy.get('#username').type('Erin Scholcroft')
     cy.get('#password').type('2079layn')
     cy.get('#log').click()

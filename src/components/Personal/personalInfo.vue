@@ -1,24 +1,25 @@
 <!--
 个人中心-个人信息
+从localStorage中读取信息
 -->
 <template>
   <div id="info">
     <v-card title="基本信息" @mouseleave.native="changeShow" @mouseenter.native="changeShow">
-      <p>姓名：{{this.GLOBAL.user_Name}}</p>
-      <p>电话：{{this.GLOBAL.phone}}</p>
-      <p>邮箱：{{this.GLOBAL.email}}</p>
+      <p>姓名：{{name}}</p>
+      <p>电话：{{phone}}</p>
+      <p>邮箱：{{email}}</p>
       <div slot="extra" v-show="isShow">
         <v-button type="primary" >编辑</v-button>
       </div>
     </v-card>
-    <v-card title="招聘信息" >
+  <!--  <v-card title="招聘信息" >
       <p>平均分：</p>
       <p>已招聘人数：</p>
     </v-card>
     <v-card title="求职信息" >
       <p>平均分：</p>
       <p>已求职工作数量：</p>
-    </v-card>
+    </v-card>-->
   </div>
 </template>
 <script>
@@ -26,13 +27,16 @@
     name:'personalInfo',
     data: function() {
       return {
-        isShow:false
+        isShow:false,
+        name:localStorage.getItem('userName'),
+        phone:localStorage.getItem('phone'),
+        email:localStorage.getItem('email')
       }
     },
     methods: {
       changeShow(){
         this.isShow = !this.isShow;
-      },
+      }
     }
   }
 </script>

@@ -33,7 +33,10 @@
       created() {
           axios.get('/apis/getAppbyId',{
             params:{
-              userid:this.GLOBAL.user_ID
+              userid:localStorage.getItem('user_ID')
+            },
+            headers:{
+              Authorization:'Bearer '+localStorage.getItem('token')
             }
           }).then(
             res => {

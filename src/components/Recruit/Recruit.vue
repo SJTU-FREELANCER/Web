@@ -13,7 +13,7 @@
       <p slot="experience">个人经历：{{item.experience}}</p>
       <p slot="education">教育： {{item.education}}</p>
     </R_card>
-    <v-pagination id="page" show-quick-jumper :total="500"></v-pagination>
+
 
 
   </div>
@@ -46,6 +46,9 @@
      params:{
        experience:tmp.experience,
        education:tmp.education
+     },
+     headers:{
+       Authorization:'Bearer '+localStorage.getItem('token')
      }
    }).then(
      res => {
@@ -59,7 +62,11 @@
  }
     },
     created() {
-      axios.get('/apis/get_applicants').then(
+      axios.get('/apis/get_applicants',{
+        headers:{
+        Authorization:'Bearer '+localStorage.getItem('token')
+      }
+      }).then(
         res => {
           this.list=res.data
         }
@@ -72,7 +79,10 @@
       //先把我发布的的所有招聘信息取出来放在全局变量
       axios.get('/apis/getRecbyId',{
         params:{
-          userid:this.GLOBAL.user_ID
+          userid:localStorage.getItem('user_ID')
+        },
+        headers:{
+          Authorization:'Bearer '+localStorage.getItem('token')
         }
       }).then(
         res => {

@@ -1,6 +1,6 @@
 describe('我的应聘者',function () {
   it('登录', function () {
-    cy.visit('http://localhost:8081/login') //访问url
+    cy.visit('http://localhost') //访问url
     cy.get('#username').type('Erin Scholcroft')
     cy.get('#password').type('2079layn')
     cy.get('#log').click()

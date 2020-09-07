@@ -9,7 +9,7 @@ import personalInfo from "../components/Personal/personalInfo";
 import ResumeDisplay from "../components/Personal/myResume";
 import Resume from "../components/Personal/alterResume";
 import User from "../components/User";
-import ApplyInfo from "../components/Apply/Apply";
+/*import ApplyInfo from "../components/Apply/Apply";*/
 import RecruitInfo from "../components/Recruit/Recruit";
 import myRecruitInfo from "../components/Recruit/myRecruitInfo";
 import new_recruit from "../components/Recruit/new_recruit";
@@ -18,12 +18,14 @@ import myApplyInfo from "../components/Apply/myApplyInfo";
 import myApplicants from "../components/Recruit/myApplicants";
 import Employees from "../components/Recruit/Employees";
 import Mymessage from "../components/Apply/Mymessage";
+import adminView from "../components/adminView";
 
 Vue.use(Router)
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
+
 export default new Router({
   routes: [
     {
@@ -48,12 +50,18 @@ export default new Router({
       component: Register
     },
     {
-      path: '/user/:userId',
+      path:'/admin',
+      component:adminView
+    },
+    {
+     /* path: '/user/:userId',*/
+      path:'/user',
       component: User,
-      meta: {
-        title: '用户'
-      },
       children: [
+        {
+          path:'',
+          component:home
+        },
         {
           path: 'personalInfo',
           component: personalInfo
@@ -76,7 +84,7 @@ export default new Router({
         },
         {
           path: 'applyInfo',
-          component: ApplyInfo
+          component: ()=>import("../components/Apply/Apply")
         },
         {
           path:'my_recruit_info',

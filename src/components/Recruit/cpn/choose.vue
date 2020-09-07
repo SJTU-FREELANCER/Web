@@ -24,13 +24,16 @@ import axios from 'axios'
     },
     methods: {
       ok () {
-        this.$Message.info('rec_id='+this.choose+',user_id='+this.userid);
+        /*this.$Message.info('rec_id='+this.choose+',user_id='+this.userid);*/
         let num=parseInt(this.choose)
         //招聘
         axios.get('/apis/add_employ_info',{
           params:{
             user_id:this.userid,
             rec_id:num
+          },
+          headers:{
+            Authorization:'Bearer '+localStorage.getItem('token')
           }
         }).then(
           res => {

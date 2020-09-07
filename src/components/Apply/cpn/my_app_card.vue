@@ -40,8 +40,11 @@ import axios from 'axios'
           //删除这一条求职信息
           axios.get('/apis/delete_apply_info',{
             params:{
-              user_id:this.GLOBAL.user_ID,
+              user_id:localStorage.getItem('user_ID'),
               rec_id:this.rec_id
+            },
+            headers:{
+              Authorization:'Bearer '+localStorage.getItem('token')
             }
           }).then(
             res => {

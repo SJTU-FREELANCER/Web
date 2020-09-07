@@ -42,6 +42,9 @@
             params:{
               user_id:this.userid,
               rec_id:this.rec_id
+            },
+            headers:{
+              Authorization:'Bearer '+localStorage.getItem('token')
             }
           }).then(
             res => {

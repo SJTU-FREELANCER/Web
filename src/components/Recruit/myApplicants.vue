@@ -13,7 +13,7 @@
       :key="index"
       >
       <my_applicants_card v-for="(i,index) in employees[index]"
-      :key="index"
+      :key="index" :userid="i.user_ID" :rec_id="item.rec_id" :accepted="i.accepted"
       >
         <p slot="name">姓名：{{i.name}}</p>
         <p slot="gender">性别：{{i.gender?'female':'male'}}</p>
@@ -47,12 +47,15 @@
         //先得到所有招聘信息的rec_id
         axios.get('/apis/getRecbyId', {
           params: {
-            userid: this.GLOBAL.user_ID
+            userid: localStorage.getItem('user_ID')
+          },
+          headers:{
+            Authorization:'Bearer '+localStorage.getItem('token')
           }
         }).then(
          /* res => {console.log(res)}*/
           res => {
-            console.log(res.data)
+            console.log(res)
             //保存招聘信息的id和title
             let index
             for (let index=0;index<res.data.length;index++) {
@@ -69,6 +72,9 @@
               axios.get('/apis/getMyApplicants',{
                 params:{
                   rec_id:this.rec[i].rec_id
+                },
+                headers:{
+                  Authorization:'Bearer '+localStorage.getItem('token')
                 }
               }).then(
                 res => {
